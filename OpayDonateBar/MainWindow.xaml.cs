@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,30 @@ namespace OpayDonateBar
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //this.Hide();
+            //Setting w = new Setting();
+            //w.Show();
+        }
+
+        private void Window_Load(object sender, RoutedEventArgs e)
+        {
+            if (!File.Exists("Config"))
+            {
+                MessageBoxResult result = MessageBox.Show("設定檔不存在!!"); 
+                if (result == MessageBoxResult.OK)
+                {
+                    this.Hide();
+                    Setting w = new Setting();//視窗名稱 變數名稱 = new 視窗名稱();
+                    w.Show();
+                }
+            }
+        }
+
+ 
     }
 }

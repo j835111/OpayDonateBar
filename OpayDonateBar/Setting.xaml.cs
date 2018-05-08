@@ -23,5 +23,11 @@ namespace OpayDonateBar
         {
             InitializeComponent();
         }
+
+        private void Window_Closed(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Close();
+            MainWindow
+        }
     }
 }

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpayDonateBar"
         mc:Ignorable="d"
-        Title="歐付寶斗內條" Height="200" Width="300">
+        Title="歐付寶斗內條" Height="200" Width="300" Loaded="Window_Load">
     <Grid Margin="0,0,0,0">
         <TextBlock HorizontalAlignment="Left" Margin="40,26,0,0" TextWrapping="Wrap" Text="設定檔狀態:" VerticalAlignment="Top" Width="90" Height="20" FontSize="16"/>
         <TextBlock Name="configstate" HorizontalAlignment="Left" Margin="155,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="20" FontSize="16"/>
         <TextBlock HorizontalAlignment="Left" Margin="40,77,0,0" TextWrapping="Wrap" Text="軟體狀態:" VerticalAlignment="Top" Width="90" Height="20" FontSize="16"/>
         <TextBlock Name="softstate" HorizontalAlignment="Left" Margin="155,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" Height="20" FontSize="16"/>
-        <Button Content="開始執行" HorizontalAlignment="Left" Margin="110,126,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="16"/>
+        <Button Content="開始執行" HorizontalAlignment="Left" Margin="110,126,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="16" Click="Button_Click"/>
     </Grid>
 </Window>
