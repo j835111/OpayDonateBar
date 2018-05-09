@@ -12,7 +12,7 @@
         <TextBox HorizontalAlignment="Left" Height="28" Margin="44,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" FontSize="16"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Height="28" FontSize="16"><Run Text="3"/><Run Text="."/><Run Text="填入歐付寶"/><Run Text="網址中/Donate/後面的文字"/></TextBlock>
         <TextBox HorizontalAlignment="Left" Height="28" Margin="44,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" FontSize="16"/>
-        <Button Content="確定" HorizontalAlignment="Left" Margin="135,222,0,0" VerticalAlignment="Top" Width="100" Height="20"/>
+        <Button Content="確定" HorizontalAlignment="Left" Margin="135,222,0,0" VerticalAlignment="Top" Width="100" Height="20" Click="Button_Click"/>
 
     </Grid>
 </Window>
