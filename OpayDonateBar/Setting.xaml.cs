@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,15 +27,21 @@ namespace OpayDonateBar
             InitializeComponent();
         }
 
-        private void Window_Closed(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MainWindow main = new MainWindow();
-            main.Show();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            Data data = new Data
+            {
+                token = MainWindow.Authorization(CodeType.authorization_code, code.Text),
+                OpayID = opayid.Text
+            };
+            FileStream fs = new FileStream("Config", FileMode.Create, FileAccess.Write);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(fs, data);
+            fs.Close();
+            fs.Dispose();
+            this.Close();
+            MainWindow main = new MainWindow();
+            main.Show();
         }
 
         
