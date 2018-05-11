@@ -1,11 +1,14 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,6 +26,8 @@ namespace OpayDonateBar
     /// </summary>
     public partial class MainWindow : Window
     {
+        Data data;
+        static DateTime TokenTime;
         public MainWindow()
         {
             InitializeComponent();  
@@ -30,9 +35,14 @@ namespace OpayDonateBar
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //this.Hide();
-            //Setting w = new Setting();
-            //w.Show();
+            data = Func.GetConfig();
+            data.token = Func.Authorization(CodeType.refresh_token, data.token.refresh_token);
+            Timer timer = new Timer(5000)
+            {
+                AutoReset = true,
+                Enabled = true
+            };
+            timer.Elapsed += Func.OpayTimerHandler;
         }
 
         private void Window_Load(object sender, RoutedEventArgs e)
@@ -48,28 +58,7 @@ namespace OpayDonateBar
                 }
             }
         }
-
-        public static Token Authorization(CodeType type,string code)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://streamlabs.com/api/v1.0/token");
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.Method = "POST";
-
-            string body = "grant_type=" + type.ToString() + "&client_id=4Rvh8gfvnHhP1bcL3LIb2F2QOsgO2XzLPTi5t4Gk&client_secret=XqdMl52Oukcu7sHNvDNLCR4qJIutngSuGYLGtsIZ&redirect_uri=https://j835111.azurewebsites.net&code=" + token;
-            byte[] byteArray = Encoding.UTF8.GetBytes(body);
-            request.ContentLength = byteArray.Length;
-
-            Stream stream = request.GetRequestStream();
-            stream.Write(byteArray, 0, byteArray.Length);
-            stream.Close();
-
-            string sr = new StreamReader(request.GetResponse().GetResponseStream()).ReadToEnd();
-            return JsonConvert.DeserializeObject<Token>(sr);
-        }
+        
     }
-    public enum CodeType
-    {
-        authorization_code,
-        refresh_token
-    }
+    
 }
