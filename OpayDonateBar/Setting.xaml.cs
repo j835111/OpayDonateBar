@@ -31,17 +31,18 @@ namespace OpayDonateBar
         {
             Data data = new Data
             {
-                token = MainWindow.Authorization(CodeType.authorization_code, code.Text),
+                token = null,
+                Client_ID = client_id.Text,
+                Client_Secret=client_secret.Text,
                 OpayID = opayid.Text
             };
+            data.token = Func.Authorization(CodeType.authorization_code, data,code.Text);
             FileStream fs = new FileStream("Config", FileMode.Create, FileAccess.Write);
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(fs, data);
             fs.Close();
             fs.Dispose();
             this.Close();
-            MainWindow main = new MainWindow();
-            main.Show();
         }
 
         
